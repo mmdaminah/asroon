@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 function App() {
   return (
     <Suspense fallback="<div>loading...</div>">
-      <div>
+      <div className="w-100 h-100">
         <Router>
             <Switch>
               {

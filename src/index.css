@@ -1,9 +1,16 @@
+@font-face {
+  font-family: 'BYekan';
+  src: url('./Assets/BYekan.ttf');
+}
 html,body,#root {
   width:100%;
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color:#E5E5E5;
 }
 * {
   box-sizing: border-box;
+  direction: rtl;
+  font-family: 'BYekan';
 }
