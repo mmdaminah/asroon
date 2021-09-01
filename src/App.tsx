@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Suspense } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import routes from './Routes/mainRoutes'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback="<div>loading...</div>">
+      <div>
+        <Router>
+            <Switch>
+              {
+                routes.map((item,index)=>{
+                  return(
+                    <Route
+                    key={index} 
+                    path={item.path} exact={item.exact} 
+                    render={props=> <item.Component {...props} />} />
+                  )
+                })
+              }
+            </Switch>
+        </Router>
+      </div>
+    </Suspense>
   );
 }
 
