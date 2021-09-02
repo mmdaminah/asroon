@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { Button, Modal, Table } from 'react-bootstrap'
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps, useHistory } from 'react-router-dom'
 import { context } from '../../App'
 import logo from '../../Assets/logo-main.svg'
 import { FaRegTrashAlt } from 'react-icons/fa'
@@ -15,6 +15,7 @@ interface IUser {
     date: Date
 }
 const ShowForm = (props: RouteComponentProps) => {
+    const history = useHistory()
     const { users, setUsers } = useContext<any>(context)
     const handleDelete = () => {
         setUsers(users.filter((item: IUser) => item.date.getTime() !== dateId.getTime()))
@@ -22,9 +23,9 @@ const ShowForm = (props: RouteComponentProps) => {
     }
     //modal
     const [show, setShow] = useState(false);
-    const [dateId,setDateId] = useState(new Date())
+    const [dateId, setDateId] = useState(new Date())
     const handleClose = () => setShow(false);
-    const handleShow = (date:Date) => {
+    const handleShow = (date: Date) => {
         setDateId(date)
         setShow(true);
     }
@@ -41,8 +42,14 @@ const ShowForm = (props: RouteComponentProps) => {
                 <div className="d-flex justify-content-between">
                     <div className="my-auto display-6">داده ها</div>
                     <div>
-                        <Button className="mx-3 my-3" variant="outline-danger">دریافت اطلاعات از سرور</Button>
-                        <Button variant="danger"><BiPlusCircle className="mx-2" />ساخت اکانت جدید</Button>
+                        <Button className="mx-3 my-3" variant="outline-danger">
+                            دریافت اطلاعات از سرور
+                        </Button>
+                        <Button
+                            onClick={() => history.push("/")}
+                            variant="danger"><BiPlusCircle className="mx-2" />
+                            ساخت اکانت جدید
+                        </Button>
                     </div>
                 </div>
                 <Table className="bg-white table-in-show-form">
@@ -67,8 +74,12 @@ const ShowForm = (props: RouteComponentProps) => {
                                         <td>{user.age}</td>
                                         <td>{user.email}</td>
                                         <td>{user.date.toLocaleDateString('fa-IR')}</td>
-                                        <td className="text-center"><BsPencilSquare style={{cursor:"pointer"}} /></td>
-                                        <td className="text-center" style={{color:"rgba(222, 45, 38, 1)",cursor:"pointer"}}><FaRegTrashAlt
+                                        <td className="text-center">
+                                            <BsPencilSquare 
+                                            onClick={()=>history.push(`/editform/${user.date.getTime()}`)}
+                                            style={{ cursor: "pointer" }} />
+                                        </td>
+                                        <td className="text-center" style={{ color: "rgba(222, 45, 38, 1)", cursor: "pointer" }}><FaRegTrashAlt
                                             onClick={() => handleShow(user.date)}
                                         /></td>
                                     </tr>
