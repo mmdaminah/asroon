@@ -3,18 +3,20 @@ import { RouteComponentProps, useHistory } from 'react-router-dom'
 import { context } from '../../App'
 import logo from '../../Assets/logo-main.svg'
 import './CreateForm.styles.css'
-interface IInput {
+interface IUser {
     fullName: string;
     phoneNumber: string;
     age: string;
     email: string;
+    date:Date
 }
 const CreateForm = (props: RouteComponentProps) => {
-    const [input, setInput] = useState<IInput>({
+    const [input, setInput] = useState<IUser>({
         fullName: "",
         phoneNumber: "",
         age: "",
-        email: ""
+        email: "",
+        date:new Date()
     })
     const {users, setUsers} = useContext<any>(context)
     const history = useHistory()
@@ -23,7 +25,7 @@ const CreateForm = (props: RouteComponentProps) => {
         setInput({ ...input, [data.name]: data.value })
     }
     const handleClick = ()=>{
-        setUsers([...users,input])
+        setUsers([...users,{...input,date:new Date()}])
         history.push("/showform")
     }
     return (

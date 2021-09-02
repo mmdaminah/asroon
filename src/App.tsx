@@ -3,21 +3,29 @@ import { Suspense } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import routes from './Routes/mainRoutes'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-interface IInput {
+interface IUser {
   fullName: string;
   phoneNumber: string;
   age: string;
   email: string;
+  date: Date
 }
 export const context = createContext({})
 function App() {
-  const [users, setUsers] = useState<IInput[]>([])
+  const [users, setUsers] = useState<IUser[]>([{
+    fullName: "آرش دامن افشان",
+    phoneNumber: "۰۹۳۶۶۱۸۳۴۸۳",
+    age: "32",
+    email: "Arashdma@gmail.com",
+    date: new Date()
+  }
+  ])
   return (
     <Suspense fallback="<div>loading...</div>">
       <div className="w-100 h-100">
         <Router>
           <Switch>
-            <context.Provider value={{users,setUsers}}>
+            <context.Provider value={{ users, setUsers }}>
               {
                 routes.map((item, index) => {
                   return (
