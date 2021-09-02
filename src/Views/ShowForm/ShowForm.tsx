@@ -42,7 +42,9 @@ const ShowForm = (props: RouteComponentProps) => {
                 <div className="d-flex justify-content-between">
                     <div className="my-auto display-6">داده ها</div>
                     <div>
-                        <Button className="mx-3 my-3" variant="outline-danger">
+                        <Button
+                        onClick={()=>history.push("/apilist")} 
+                        className="mx-3 my-3" variant="outline-danger">
                             دریافت اطلاعات از سرور
                         </Button>
                         <Button

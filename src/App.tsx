@@ -18,7 +18,7 @@ function App() {
     age: "32",
     email: "Arashdma@gmail.com",
     date: new Date()
-  }
+  } 
   ])
   return (
     <Suspense fallback="<div>loading...</div>">
