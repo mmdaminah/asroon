@@ -1,24 +1,35 @@
+import { useState, createContext } from 'react'
 import { Suspense } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import routes from './Routes/mainRoutes'
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+interface IInput {
+  fullName: string;
+  phoneNumber: string;
+  age: string;
+  email: string;
+}
+export const context = createContext({})
 function App() {
+  const [users, setUsers] = useState<IInput[]>([])
   return (
     <Suspense fallback="<div>loading...</div>">
       <div className="w-100 h-100">
         <Router>
-            <Switch>
+          <Switch>
+            <context.Provider value={{users,setUsers}}>
               {
-                routes.map((item,index)=>{
-                  return(
+                routes.map((item, index) => {
+                  return (
                     <Route
-                    key={index} 
-                    path={item.path} exact={item.exact} 
-                    render={props=> <item.Component {...props} />} />
+                      key={index}
+                      path={item.path} exact={item.exact}
+                      render={props => <item.Component {...props} />} />
                   )
                 })
               }
-            </Switch>
+            </context.Provider>
+          </Switch>
         </Router>
       </div>
     </Suspense>

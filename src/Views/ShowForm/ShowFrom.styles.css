@@ -1,0 +1,16 @@
+.logo-in-show-form {
+    width: 125.4px;
+    height: 132px;
+    margin-top: 116px;
+}
+.show-form-container {
+    width: 840px;
+}
+.table-in-show-form {
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+}
+.table-head {
+    background-color: rgba(219, 219, 219, 0.08);
+}
