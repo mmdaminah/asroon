@@ -2,18 +2,12 @@ import React, { useState, useContext } from 'react'
 import { RouteComponentProps, useHistory, useParams } from 'react-router-dom'
 import { context } from '../../App'
 import logo from '../../Assets/logo-main.svg'
+import IUser from '../../Interfaces/IUser'
 import './EditForm.styles.css'
-interface IUser {
-    fullName: string;
-    phoneNumber: string;
-    age: string;
-    email: string;
-    date: Date
-}
 const EditForm = (props: RouteComponentProps) => {
     const { users, setUsers } = useContext<any>(context)
-    const { id } = useParams<{id:string}>()
-    const user:IUser = users.find(((item:IUser)=> item.date.getTime()=== +id))
+    const { id } = useParams<{ id: string }>()
+    const user = users.find(((item: IUser) => item.date.getTime() === +id))
     const [input, setInput] = useState<IUser>(user)
     const history = useHistory()
     const handleChange = (event: React.ChangeEvent) => {
@@ -21,16 +15,13 @@ const EditForm = (props: RouteComponentProps) => {
         setInput({ ...input, [data.name]: data.value })
     }
     const handleClick = () => {
-        const userTobeEdited:IUser = users.find((user:IUser)=>{
+        const userTobeEdited:IUser = users.find((user: IUser) => {
             return user.date.getTime() === +id;
         })
         userTobeEdited.fullName = input.fullName;
         userTobeEdited.phoneNumber = input.phoneNumber;
         userTobeEdited.age = input.age;
         userTobeEdited.email = input.email;
-        // setUsers([...users.filter((user:IUser)=>{
-        //     user.date.getTime() === +id
-        // })])
         history.push("/showform")
     }
     return (
@@ -51,7 +42,7 @@ const EditForm = (props: RouteComponentProps) => {
                     <label className="input-label" htmlFor="">نام و نام خانوادگی</label>
                     <input
                         name="fullName"
-                        value={input.fullName}
+                        value={input?.fullName}
                         onChange={handleChange}
                         className="p-2 input" type="text" placeholder="نام و نام خانوادگی شما" />
                 </div>
@@ -59,7 +50,7 @@ const EditForm = (props: RouteComponentProps) => {
                     <label className="input-label" htmlFor="">شماره موبایل</label>
                     <input
                         name="phoneNumber"
-                        value={input.phoneNumber}
+                        value={input?.phoneNumber}
                         onChange={handleChange}
                         className="p-2 input" type="text" placeholder="شماره موبایل" />
                 </div>
@@ -67,7 +58,7 @@ const EditForm = (props: RouteComponentProps) => {
                     <label className="input-label" htmlFor="">سن</label>
                     <input
                         name="age"
-                        value={input.age}
+                        value={input?.age}
                         onChange={handleChange}
                         className="p-2 input" type="text" placeholder="سن شما" />
                 </div>
@@ -75,7 +66,7 @@ const EditForm = (props: RouteComponentProps) => {
                     <label className="input-label" htmlFor="">ایمیل</label>
                     <input
                         name="email"
-                        value={input.email}
+                        value={input?.email}
                         onChange={handleChange}
                         className="p-2 input" type="text" placeholder="ایمیل شما" />
                 </div>

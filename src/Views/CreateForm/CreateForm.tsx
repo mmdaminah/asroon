@@ -2,14 +2,8 @@ import React, { useState, useContext } from 'react'
 import { RouteComponentProps, useHistory } from 'react-router-dom'
 import { context } from '../../App'
 import logo from '../../Assets/logo-main.svg'
+import IUser from '../../Interfaces/IUser'
 import './CreateForm.styles.css'
-interface IUser {
-    fullName: string;
-    phoneNumber: string;
-    age: string;
-    email: string;
-    date:Date
-}
 const CreateForm = (props: RouteComponentProps) => {
     const [input, setInput] = useState<IUser>({
         fullName: "",
@@ -18,7 +12,7 @@ const CreateForm = (props: RouteComponentProps) => {
         email: "",
         date:new Date()
     })
-    const {users, setUsers} = useContext<any>(context)
+    const {users, setUsers} = useContext<{users:IUser[],setUsers:Function}>(context)
     const history = useHistory()
     const handleChange = (event: React.ChangeEvent) => {
         const data = event.target as HTMLInputElement;

@@ -3,14 +3,8 @@ import { Suspense } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import routes from './Routes/mainRoutes'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-interface IUser {
-  fullName: string;
-  phoneNumber: string;
-  age: string;
-  email: string;
-  date: Date
-}
-export const context = createContext({})
+import IUser from './Interfaces/IUser'
+export const context = createContext<{users:IUser[],setUsers:Function}>({users:[],setUsers:()=>{}})
 function App() {
   const [users, setUsers] = useState<IUser[]>([{
     fullName: "آرش دامن افشان",

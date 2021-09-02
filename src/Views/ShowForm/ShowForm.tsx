@@ -6,17 +6,11 @@ import logo from '../../Assets/logo-main.svg'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { BsPencilSquare } from 'react-icons/bs'
 import { BiPlusCircle } from 'react-icons/bi'
+import IUser from '../../Interfaces/IUser'
 import './ShowFrom.styles.css'
-interface IUser {
-    fullName: string;
-    phoneNumber: string;
-    age: string;
-    email: string;
-    date: Date
-}
 const ShowForm = (props: RouteComponentProps) => {
     const history = useHistory()
-    const { users, setUsers } = useContext<any>(context)
+    const { users, setUsers } = useContext<{users:IUser[],setUsers:Function}>(context)
     const handleDelete = () => {
         setUsers(users.filter((item: IUser) => item.date.getTime() !== dateId.getTime()))
         handleClose()
@@ -81,9 +75,11 @@ const ShowForm = (props: RouteComponentProps) => {
                                             onClick={()=>history.push(`/editform/${user.date.getTime()}`)}
                                             style={{ cursor: "pointer" }} />
                                         </td>
-                                        <td className="text-center" style={{ color: "rgba(222, 45, 38, 1)", cursor: "pointer" }}><FaRegTrashAlt
-                                            onClick={() => handleShow(user.date)}
-                                        /></td>
+                                        <td className="text-center"
+                                        onClick={() => handleShow(user.date)}
+                                         style={{ color: "rgba(222, 45, 38, 1)", cursor: "pointer" }}>
+                                             <FaRegTrashAlt/>
+                                             </td>
                                     </tr>
                                 )
                             })
